@@ -3,29 +3,33 @@ package calculations.exercise8;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static utilities.InputOutput.eingabeInteger;
+
 public class PizzaParty {
 
 	public static void main(String[] args) {
 
-		RechnungenFürEx8 rechnungen = new RechnungenFürEx8() {
-		};
-
 		Scanner sc = new Scanner(System.in);
 
 		try {
-			System.out.print("Anzahl Personen --> ");
-			rechnungen.setAnzahlPersonen(sc.nextInt());
+			int anzahlPersonen = eingabeInteger(sc, "Anzahl Personen --> ");
+			int anzahlPizzen = eingabeInteger(sc, "Anzahl Pizzen --> ");
 
-			System.out.print("Anzahl Pizzen --> ");
-			rechnungen.setAnzahlPizzen(sc.nextInt());
+			PizzaEssen pizzaBestellung = new PizzaEssen(anzahlPersonen, anzahlPizzen);
+			printPizzaBestellung(pizzaBestellung);
 		} catch (InputMismatchException e) {
 			System.out.println("Ein InputMismatchException-Fehler ist aufgetreten!");
 			System.out.println("Starten Sie das Programm neu!");
 			System.exit(0);
 		}
+
 		sc.close();
 
-		System.out.println(rechnungen);
 	}
 
+	private static void printPizzaBestellung(PizzaEssen pizzaBestellung) {
+		System.out.println(pizzaBestellung.anzahlPizzen + " Pizzen für " + pizzaBestellung.anzahlPersonen
+				+ " Personen. Von " + pizzaBestellung.stueckePizzaGesamt() + " Stücken Pizza bekommt jeder "
+				+ pizzaBestellung.stueckePizzaProPerson() + "Stück. Rest: " + pizzaBestellung.rest());
+	}
 }

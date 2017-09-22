@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static utilities.InputOutput.*;
+
 public class SelfCheckout {
 
 	public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class SelfCheckout {
 				int eingabeAnzahl = eingabeInteger(sc, "Wie oft haben sie ihn gekauft? --> ");
 
 				rechnungspositionen.add(new Rechnungsposition("Artikel", eingabeArtikel, eingabeAnzahl));
-				
+
 				eingabe = eingabeString(sc, "Möchten Sie einen weiteren Artikel einstellen? --> ");
 			}
 		} catch (InputMismatchException e) {
@@ -38,28 +40,9 @@ public class SelfCheckout {
 		}
 		System.out.println("======================================================");
 		System.out.println("Die Gesamtsumme ihres Einkaufs beläuft sich auf: " + summe + " Euro.");
-		
+
 		if (rechnungspositionen.size() == 0) {
 			System.out.println("Nagut, vielleicht nächstes Mal... :C");
 		}
-	}
-	
-	private static String eingabeString(Scanner sc, String frage) {
-		System.out.print(frage);
-		return sc.nextLine();
-	}
-
-	private static double eingabeDouble(Scanner sc, String frage) {
-		System.out.print(frage);
-		double result = sc.nextDouble();
-		sc.nextLine();
-		return result;
-	}
-
-	private static int eingabeInteger(Scanner sc, String frage) {
-		System.out.print(frage);
-		int result = sc.nextInt();
-		sc.nextLine();
-		return result;
 	}
 }
